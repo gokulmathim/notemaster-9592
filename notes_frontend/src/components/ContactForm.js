@@ -16,13 +16,13 @@ export default function ContactForm() {
     setForm((f) => ({ ...f, [name]: value }));
   };
 
-  // Dummy form submit handler (can be replaced with backend integration)
+  // Dummy form submit handler; keeps data strictly local and does NOT transmit
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-    // In future: send form data to backend or email service
-    // reset form for demo
-    setForm({ name: "", email: "", message: "" });
+    // No network/side-effects: All data remains only in local React state
+    setForm({ name: "", email: "", message: "" }); // Optionally clear fields
+    // Keep the confirmation for 3 seconds (can adjust as needed)
     setTimeout(() => setSubmitted(false), 3000);
   };
 
@@ -94,7 +94,7 @@ export default function ContactForm() {
         </button>
         {submitted && (
           <div style={{ color: "var(--primary)", marginTop: 8 }}>
-            Thank you! Your message was sent.
+            Message sent! <span style={{ fontSize: "0.98em", color: "var(--text-secondary)" }}>(Not transmitted)</span>
           </div>
         )}
       </form>
